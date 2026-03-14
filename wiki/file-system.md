@@ -18,8 +18,10 @@
   - [Current directory (`.`)](#current-directory-)
   - [Parent directory (`..`)](#parent-directory-)
   - [`Desktop` directory](#desktop-directory)
-  - [`<directory-path>`](#directory-path)
-  - [`<file-path>`](#file-path)
+- [Placeholders](#placeholders)
+  - [`<directory-path>` placeholder](#directory-path-placeholder)
+  - [`<file-path>` placeholder](#file-path-placeholder)
+  - [`<path>` placeholder](#path-placeholder)
 
 ## What is a file system
 
@@ -128,10 +130,31 @@ The `Desktop` directory is the folder that corresponds to the desktop on your sc
 `macOS`: `~/Desktop/`
 `WSL`: `~/Desktop/`
 
-### `<directory-path>`
+## Placeholders
+
+<!-- no toc -->
+- [`<directory-path>` placeholder](#directory-path-placeholder)
+- [`<file-path>` placeholder](#file-path-placeholder)
+- [`<path>` placeholder](#path-placeholder)
+
+### `<directory-path>` placeholder
 
 The [path](#path) of a [directory](#directory) (without `<` and `>`).
 
-### `<file-path>`
+Examples:
+
+- `../wiki` ([relative path](#relative-path))
+- `~/.ssh` ([absolute path](#absolute-path))
+
+### `<file-path>` placeholder
 
 The [path](#path) of a [file](#file) (without `<` and `>`).
+
+Examples:
+
+- `../README.md` ([relative path](#relative-path))
+- `~/.ssh/config` ([absolute path](#absolute-path))
+
+### `<path>` placeholder
+
+The [`<file-path>`](#file-path-placeholder) or the [`<directory-path>`](#directory-path-placeholder).

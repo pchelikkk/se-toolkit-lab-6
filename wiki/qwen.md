@@ -20,6 +20,7 @@
 - [Chat with `Qwen Code`](#chat-with-qwen-code)
   - [Refer to a file](#refer-to-a-file)
   - [Use a skill](#use-a-skill)
+- [Quit the chat with `Qwen Code`](#quit-the-chat-with-qwen-code)
 - [Lab instructions for `Qwen Code`](#lab-instructions-for-qwen-code)
 
 ## What is `Qwen Code`
@@ -142,6 +143,8 @@ The file must be non-empty.
 5. Write `/auth` in the chat to [authenticate via Qwen OAuth](https://github.com/QwenLM/qwen-code?tab=readme-ov-file#authentication).
 
 6. Open the link in a browser to complete the authentication procedure.
+
+7. [Quit the chat with `Qwen Code`](#quit-the-chat-with-qwen-code).
 
 ### Set up the `Qwen Code` API (remote machine)
 
@@ -305,10 +308,7 @@ The file must be non-empty.
    qwen
    ```
 
-2. If you want to exit the chat:
-
-   1. Write `/quit` in the chat.
-   2. Press `Enter`.
+   See [Quit the chat with `Qwen Code`](#quit-the-chat-with-qwen-code).
 
 ### Open a chat with `Qwen Code` using the `Qwen Code Companion` extension for `VS Code`
 
@@ -358,6 +358,11 @@ Example: `@main.py`.
 
    See [Refer to a file](#refer-to-a-file).
 5. Press `Enter`.
+
+## Quit the chat with `Qwen Code`
+
+1. Write `/quit`.
+2. Press `Enter`.
 
 ## Lab instructions for `Qwen Code`
 

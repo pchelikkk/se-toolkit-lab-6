@@ -26,6 +26,7 @@
 - [4.24. Inline paths](#424-inline-paths)
 - [4.25. Branch-on-remote references](#425-branch-on-remote-references)
 - [4.26. Example IP address](#426-example-ip-address)
+- [4.27. Troubleshooting sections](#427-troubleshooting-sections)
 
 ## 4.1. Instructions wording
 
@@ -461,3 +462,21 @@ Use `192.0.2.1` as the example IP address in all documentation.
 Good: `192.0.2.1`
 
 Bad: `192.168.1.1`, `10.0.0.1`
+
+## 4.27. Troubleshooting sections
+
+Use a blockquote for troubleshooting content. Do **not** use `<details>` blocks.
+
+Start with an `<h3>Troubleshooting</h3>` label. Each issue is a bold sentence followed by its resolution:
+
+```markdown
+> <h3>Troubleshooting</h3>
+>
+> **Issue title.**
+>
+> Resolution text.
+>
+> **Another issue.**
+>
+> Resolution text.
+```
