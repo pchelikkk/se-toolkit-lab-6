@@ -13,3 +13,13 @@ It takes a question and returns answer from LLM.
 ## Usage
 ```bash
 uv run agent.py "What is REST?"
+
+## Tools
+- `list_files(path)` - shows contents of a directory
+- `read_file(path)` - reads file contents
+
+## Agentic Loop
+1. Send question + tool definitions to LLM
+2. If LLM calls tools → execute them → feed results back
+3. Repeat until answer (max 10 calls)
+4. Output JSON with answer, source, and tool_calls log
