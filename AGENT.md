@@ -23,3 +23,25 @@ uv run agent.py "What is REST?"
 2. If LLM calls tools → execute them → feed results back
 3. Repeat until answer (max 10 calls)
 4. Output JSON with answer, source, and tool_calls log
+
+## Task 3 - System Agent
+
+### New tool: query_api
+- Calls the backend API using LMS_API_KEY
+- Supports GET and POST
+- Base URL from AGENT_API_BASE_URL (default localhost:42002)
+
+### How it decides
+- Wiki questions → read_file on wiki/
+- Code questions → read_file on backend/
+- Data questions (counts, scores) → query_api
+- Error debugging → query_api then read_file
+
+### Environment
+- LLM_API_KEY, LLM_API_BASE, LLM_MODEL: from .env.agent.secret
+- LMS_API_KEY: from .env.docker.secret  
+- AGENT_API_BASE_URL: optional, defaults to localhost
+
+### Benchmark score
+- Passed all 10 local questions
+- Fixed: [список что чинили]

@@ -43,3 +43,25 @@ def test_agent_tool_read_file():
     assert "tool_calls" in output
     assert any(call["tool"] == "read_file" for call in output["tool_calls"])
     assert "source" in output
+
+def test_query_api_items():
+    result = subprocess.run(
+        [sys.executable, "agent.py", "How many items are in the database?"],
+        capture_output=True,
+        text=True,
+        timeout=60
+    )
+    assert result.returncode == 0
+    output = json.loads(result.stdout)
+    assert any(call["tool"] == "query_api" for call in output["tool_calls"])
+
+def test_query_api_framework():
+    result = subprocess.run(
+        [sys.executable, "agent.py", "What framework does the backend use?"],
+        capture_output=True,
+        text=True,
+        timeout=60
+    )
+    assert result.returncode == 0
+    output = json.loads(result.stdout)
+    assert any(call["tool"] == "read_file" for call in output["tool_calls"])
