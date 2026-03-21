@@ -2,116 +2,68 @@
 
 ## Goal
 
-Turn the documentation agent into a system agent that can answer both repository questions and live backend questions.
+Add `query_api` tool to answer system questions (framework, ports, status codes) and data queries (item count, scores).
 
-## Implementation plan
+## New Tool: `query_api`
 
-### 1. Add a new `query_api` tool
+### Parameters
 
-I will define a third function-calling schema in `agent.py`:
+- `method` - HTTP method (GET, POST, etc.)
+- `path` - API endpoint (e.g., `/items/`, `/analytics/completion-rate`)
+- `body` - optional JSON request body
 
-- `method` — HTTP method, usually `GET`
-- `path` — backend path such as `/items/` or `/analytics/completion-rate`
-- `params` — optional query parameters like `{"lab": "lab-99"}`
+### Returns
 
-The tool will call the deployed backend through `AGENT_API_BASE_URL` and authenticate with:
+JSON string with `status_code` and `body`.
 
-```text
-Authorization: Bearer <LMS_API_KEY>
-```
+### Authentication
 
-This keeps the backend key separate from the LLM provider key.
+Use `LMS_API_KEY` from `.env.docker.secret` (separate from `LLM_API_KEY`).
 
-### 2. Read all config from environment variables
+## Environment Variables
 
-The agent must not hardcode any URLs, keys, or model names. It will read:
+| Variable | Purpose | Source |
+|----------|---------|--------|
+| `LLM_API_KEY` | LLM provider API key | `.env.agent.secret` |
+| `LLM_API_BASE` | LLM API endpoint URL | `.env.agent.secret` |
+| `LLM_MODEL` | Model name | `.env.agent.secret` |
+| `LMS_API_KEY` | Backend API key for `query_api` | `.env.docker.secret` |
+| `AGENT_API_BASE_URL` | Base URL for `query_api` (default: `http://localhost:42002`) | Optional |
 
-- `LLM_API_KEY`
-- `LLM_API_BASE`
-- `LLM_MODEL`
-- `LMS_API_KEY`
-- `AGENT_API_BASE_URL` with default `http://localhost:42002`
+## System Prompt Updates
 
-For local convenience, the script will load values from:
+Update prompt to tell LLM when to use each tool:
 
-- `.env.agent.secret`
-- `.env.docker.secret`
-- `.env`
+- `read_file` - wiki instructions, code, Docker files, ETL logic
+- `list_files` - structure discovery
+- `query_api` - runtime behavior, item counts, status codes, API errors
 
-### 3. Improve the system prompt
+## Agent Loop Hardening
 
-The prompt should explicitly tell the LLM which source of truth to use:
+- Handle `content: null` from tool-calling responses: `msg.get("content") or ""`
+- Keep tool call log for debugging
+- Truncate long tool outputs to prevent loops
 
-- `read_file` for wiki instructions, code, Docker files, and ETL logic
-- `list_files` for structure discovery
-- `query_api` for current runtime behavior, item counts, status codes, and reproducing API errors
+## Tests
 
-For bug diagnosis, the prompt should encourage a two-step workflow:
+Add 2 regression tests:
 
-1. reproduce the problem with `query_api`
-2. inspect code with `read_file`
+1. Framework question → must use `read_file`
+2. Item count question → must use `query_api`
 
-### 4. Harden the agent loop
+Use stub LLM for deterministic tests.
 
-I will fix a common failure mode where tool-calling responses have `content: null`. The loop will use:
+## Benchmark Strategy
 
-```python
-msg.get("content") or ""
-```
+Run `uv run run_eval.py` and iterate:
 
-I will also:
+1. Fix wrong tool choice
+2. Fix unclear tool schema
+3. Fix wrong API path or params
+4. Tighten system prompt
 
-- keep a tool call log for debugging and eval checks
-- infer `source` from the last file-based tool call
-- truncate long tool outputs so the model does not loop on oversized files
+## Files
 
-### 5. Add regression tests
-
-I will add 2 tool-selection tests:
-
-- framework question → must use `read_file`
-- item count question → must use `query_api`
-
-To keep tests deterministic, they will use a stub LLM instead of a real network call.
-
-## Initial benchmark diagnosis
-
-I could not run `uv run run_eval.py` in this environment because the required local secrets and live services are not available here.
-
-Expected first weak spots before the fix:
-
-- no `query_api` tool at all
-- `requests` and `python-dotenv` were imported even though they are not declared in project dependencies
-- no clear distinction between wiki answers and runtime system answers
-- fragile handling of `content: null`
-
-## Iteration strategy
-
-1. finish the tool implementation
-2. verify tests locally
-3. start `run_eval.py`
-4. for each failed prompt, check whether the problem is:
-   - wrong tool choice
-   - unclear tool schema
-   - wrong API path or params
-   - weak system prompt
-5. tighten the prompt and tool descriptions until all 10 local questions pass
-
-## Local setup reminders for the lab
-
-To reset the lab cleanly on your machine:
-
-1. delete the old `se-toolkit-lab-6` folder
-2. clone the fork again into `software-engineering-toolkit`
-3. open the repo in `VS Code` from WSL
-4. on the VM, start the Qwen/OpenAI-compatible API server
-5. on WSL, point `.env.agent.secret` to `http://<vm-ip>:<qwen-port>/v1`
-6. keep `.env.docker.secret` local for the backend key used by `query_api`
-7. run the backend locally so the agent can query `http://localhost:42002`
-
-That gives the intended architecture:
-
-- WSL runs `agent.py`
-- the agent sends LLM requests to the VM
-- the local backend is queried through `query_api`
-- the answer returns back to WSL
+- `agent.py` - add `query_api` tool, update system prompt, harden loop
+- `AGENT.md` - document `query_api` tool and lessons learned (200+ words)
+- `tests/test_agent.py` - add 2 tool-selection tests

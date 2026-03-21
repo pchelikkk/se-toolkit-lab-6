@@ -83,7 +83,7 @@ These are the 10 questions `run_eval.py` tests locally. There are two grading mo
 Your agent must also use the listed tool(s) — calling the wrong tool fails the check even if the answer text is correct.
 
 | # | Question | Grading | Expected | Tools required |
-|---|----------|---------|----------|----------------|
+| :--- | :--- | :--- | :--- | :--- |
 | 0 | According to the project wiki, what steps are needed to protect a branch on GitHub? | keyword | `branch`, `protect` | `read_file` |
 | 1 | What does the project wiki say about connecting to your VM via SSH? Summarize the key steps. | keyword | `ssh` / `key` / `connect` | `read_file` |
 | 2 | What Python web framework does this project's backend use? Read the source code to find out. | keyword | `FastAPI` | `read_file` |

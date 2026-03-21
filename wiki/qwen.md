@@ -36,7 +36,8 @@
 See:
 
 - [Set up the `Qwen Code` (local machine)](#set-up-the-qwen-code-local-machine).
-- [Set up the `Qwen Code` (remote machine)](#set-up-the-qwen-code-remote-machine).
+- [Set up the `Qwen Code` CLI (REMOTE)](#set-up-the-qwen-code-cli-remote).
+- [Set up the `Qwen Code` API (REMOTE)](#set-up-the-qwen-code-api-remote).
 
 ## Set up the `Qwen Code` (local machine)
 
