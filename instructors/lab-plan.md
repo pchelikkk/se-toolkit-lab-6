@@ -145,7 +145,7 @@ Students document their chosen extension in a plan, implement it, and write test
 
 ## Infrastructure constraints
 
-See [`autochecker/docs/infrastructure.md`](../../../autochecker/docs/infrastructure.md) for course-wide constraints (dev server, relay, university VMs, LLM API availability).
+See `autochecker/docs/infrastructure.md` for course-wide constraints (dev server, relay, university VMs, LLM API availability).
 
 ### Lab 6 implications
 
