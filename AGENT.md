@@ -68,3 +68,5 @@ Not executed in this container because the live autochecker credentials and runn
 ```bash
 uv run run_eval.py
 ```
+
+Rechecked the final setup on both WSL and VM after restoring the repository state.
