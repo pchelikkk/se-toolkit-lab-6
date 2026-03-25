@@ -60,15 +60,15 @@
 
 ### `lab/tasks/setup-simple.md`
 
-- [lab/tasks/setup-simple.md:58](../../lab/tasks/setup-simple.md#12-set-up-your-fork) — ### 1.2. Set up your fork (empty)
-- [lab/tasks/setup-simple.md:120](../../lab/tasks/setup-simple.md#14-deploy-to-your-vm) — ### 1.4. Deploy to your VM (empty)
+- [lab/tasks/setup-simple.md:58](../../lab/tasks/setup-simple.md#11-set-up-your-fork) — ### 1.2. Set up your fork (empty)
+- [lab/tasks/setup-simple.md:120](../../lab/tasks/setup-simple.md#16-deploy-to-your-vm) — ### 1.4. Deploy to your VM (empty)
 
 ### `lab/tasks/setup.md`
 
-- [lab/tasks/setup.md:84](../../lab/tasks/setup.md#13-set-up-your-fork) — ### 1.3. Set up your fork (empty)
-- [lab/tasks/setup.md:123](../../lab/tasks/setup.md#14-set-up-programs) — ### 1.4. Set up programs (empty)
-- [lab/tasks/setup.md:166](../../lab/tasks/setup.md#16-clone-your-fork) — ### 1.6. Clone your fork (empty)
-- [lab/tasks/setup.md:291](../../lab/tasks/setup.md#112-deploy-to-your-vm) — ### 1.12. Deploy to your VM (empty)
+- [lab/tasks/setup.md:84](../../lab/tasks/setup.md#13-set-up-your-fork-local) — ### 1.3. Set up your fork (empty)
+- [lab/tasks/setup.md:123](../../lab/tasks/setup.md#14-set-up-programs-local) — ### 1.4. Set up programs (empty)
+- [lab/tasks/setup.md:166](../../lab/tasks/setup.md#16-clone-your-fork-local) — ### 1.6. Clone your fork (empty)
+- [lab/tasks/setup.md:269](../../lab/tasks/setup.md#112-upd-set-up-the-qwen-code-api-vm) — ### 1.12. (UPD) Set up the `Qwen Code` API (VM)
 
 ## Wiki
 
