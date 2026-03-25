@@ -23,7 +23,7 @@ Use `LMS_API_KEY` from `.env.docker.secret` (separate from `LLM_API_KEY`).
 ## Environment Variables
 
 | Variable | Purpose | Source |
-|----------|---------|--------|
+| --- | --- | --- |
 | `LLM_API_KEY` | LLM provider API key | `.env.agent.secret` |
 | `LLM_API_BASE` | LLM API endpoint URL | `.env.agent.secret` |
 | `LLM_MODEL` | Model name | `.env.agent.secret` |
